@@ -1,6 +1,0 @@
-deploy:
-  provider: pypi
-  user: "@token"
-  password: "pypi:AgEIcHlwaS5vcmcCJDI4NmRiZTAyLTg4ZjEtNGJlMi1iMjUwLWJlYTdhZmE0ZGI1YgACOHsicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJzaWxrLW1sIl19LCAidmVyc2lvbiI6IDF9AAAGIMhGB6Zo0GCaoCXgtKmOMnzbFrfJq3W7pIU4i4Ydx_ht"
-  on:
-    tags: true
