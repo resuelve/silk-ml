@@ -1,7 +1,7 @@
-Classificator
+Classifier
 ==============
 
-.. autoclass:: classification::Classificator
+.. autoclass:: classification::Classifier
 
   .. rubric:: Functions
 

@@ -2,7 +2,7 @@ import pandas as pd
 from scipy.stats import ttest_ind, chi2_contingency
 
 
-class Classificator:
+class Classifier:
     ''' General tasks for classification and data analysis
 
     :param target: categorical variable to classify
@@ -11,11 +11,11 @@ class Classificator:
     :type filename: string
 
     Example::
-        cl1 = Classificator()
-        cl2 = Classificator('test')
-        cl3 = Classificator(target='test')
-        cl4 = Classificator('test', 'path/file')
-        cl5 = Classificator(target='test', filename='path/file')
+        cl1 = Classifier()
+        cl2 = Classifier('test')
+        cl3 = Classifier(target='test')
+        cl4 = Classifier('test', 'path/file')
+        cl5 = Classifier(target='test', filename='path/file')
     '''
 
     def __init__(self, target=None, filename=None):
