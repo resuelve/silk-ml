@@ -15,6 +15,9 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     python_requires='~=3.5',
     install_requires=['pandas', 'scipy', 'sklearn'],
+    extras_require={
+        'dev': ['setuptools', 'wheel', 'twine', 'Sphinx'],
+    },
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',
