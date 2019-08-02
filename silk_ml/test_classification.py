@@ -12,6 +12,7 @@ def generate_test():
         * label3: categorical variable (0 or 1)
         * target: categorical variable (0 or 1)
     '''
+    rd.seed(50)
     classificator = Classificator()
     data = {
         'label1': [rd.random() + 5 for _ in range(100)],
@@ -31,7 +32,7 @@ class TestClassification(unittest.TestCase):
         self.assertEqual(Classificator('test').target, 'test')
         self.assertEqual(Classificator(target='test').target, 'test')
 
-    def test_stantarize(self):
+    def test_standarize(self):
         classificator = generate_test()
 
         # Applies a power normalizer and a min-max scaler
