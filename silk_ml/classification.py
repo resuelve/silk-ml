@@ -68,7 +68,7 @@ class Classifier:
         self.X.loc[:, :] = standard
 
     def split_classes(self, label):
-        ''' Returns the splited value of the dataset using 
+        ''' Returns the splited value of the dataset using the requested label
         
         :return: the `positive` and `negative` data splited
         :rtype: (list, list)
