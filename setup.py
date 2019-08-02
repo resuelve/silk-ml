@@ -14,10 +14,7 @@ setuptools.setup(
     url='https://github.com/resuelve/silk-ml',
     packages=setuptools.find_packages(),
     python_requires='~=3.5',
-    install_requires=['pandas', 'scipy'],
-    extras_require={
-        'dev': ['unittest']
-    },
+    install_requires=['pandas', 'scipy', 'sklearn'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',

@@ -10,7 +10,7 @@ class Classificator:
 
     def set_target(self, target):
         self.target = target
-        if self.data:
+        if self.data is not None:
             self.Y = self.data[target]
             self.X = self.data.drop(columns=[target])
 
@@ -23,7 +23,7 @@ class Classificator:
         normalized = normalizer.fit_transform(self.X).transpose()
 
         # Check if in the normalization any data get lost
-        for i, column in enumerate(self.X.columns.tolist()[1:]):
+        for i, column in enumerate(self.X.columns.tolist()):
             if normalized[i].var() <= 1e-10:
                 normalized[i] = self.X[column]
 
@@ -38,7 +38,7 @@ class Classificator:
     def features_metrics(self):
         features = {}
         features_cols = ['cardinality kind', 'split probability']
-        for column in self.X.columns.tolist()[1:]:
+        for column in self.X.columns.tolist():
             # Categorical case
             if len(self.X[column].unique().tolist()) <= 2:
                 cont_table = pd.crosstab(self.Y, self.X[column], margins=False)
