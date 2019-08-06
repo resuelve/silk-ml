@@ -1,7 +1,7 @@
 # silk-ml
 
-![PyPI](https://img.shields.io/pypi/v/silk-ml?style=flat-square)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/silk-ml?style=flat-square)
+[![PyPI version][pypi-image]][pypi-url]
+![PyPI python Version](https://img.shields.io/pypi/pyversions/silk-ml?style=flat-square)
 
 Simple Intelligent Learning Kit (SILK) for Machine learning
 
@@ -15,3 +15,6 @@ In the automation process, a series of aids for the exploration and sanitation o
 
 # Licence
 - [MIT](./LICENSE)
+
+[pypi-image]: https://img.shields.io/pypi/v/silk-ml?style=flat-square
+[pypi-url]: https://pypi.org/project/silk-ml/
