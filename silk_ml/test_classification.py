@@ -13,16 +13,16 @@ def generate_test():
         * target: categorical variable (0 or 1)
     '''
     rd.seed(50)
-    Classifier = Classifier()
+    classifier = Classifier()
     data = {
         'label1': [rd.random() + 5 for _ in range(100)],
         'label2': [rd.random() * 3 - 1 for _ in range(100)],
         'label3': [round(rd.random()) for _ in range(100)],
         'target': [round(rd.random()) for _ in range(100)],
     }
-    Classifier.data = pd.DataFrame(data)
-    Classifier.set_target('target')
-    return Classifier
+    classifier.data = pd.DataFrame(data)
+    classifier.set_target('target')
+    return classifier
 
 
 class TestClassification(unittest.TestCase):

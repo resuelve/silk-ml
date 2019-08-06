@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='silk-ml',
-    version='0.0.1',
+    version='0.0.2',
     author='Miguel Asencio',
     author_email='maasencioh@gmail.com',
     description='Simple Intelligent Learning Kit (SILK) for Machine learning',
