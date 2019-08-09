@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>classification &#8212; silk_ml 0.0.3 documentation</title>
+    <title>silk_ml &#8212; silk_ml 0.0.3 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,7 +14,6 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Welcome to silk_ml’s documentation!" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -31,11 +30,11 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-silk_ml.classification">
-<span id="classification"></span><h1>classification<a class="headerlink" href="#module-silk_ml.classification" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-silk_ml">
+<span id="silk-ml"></span><h1>silk_ml<a class="headerlink" href="#module-silk_ml" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="silk_ml.classification.Classifier">
-<em class="property">class </em><code class="sig-prename descclassname">silk_ml.classification.</code><code class="sig-name descname">Classifier</code><span class="sig-paren">(</span><em class="sig-param">target=None</em>, <em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.Classifier">
+<em class="property">class </em><code class="sig-prename descclassname">silk_ml.</code><code class="sig-name descname">Classifier</code><span class="sig-paren">(</span><em class="sig-param">target=None</em>, <em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.Classifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>General tasks for classification and data analysis</p>
 <dl class="field-list simple">
@@ -46,9 +45,17 @@
 </ul>
 </dd>
 </dl>
+<dl class="simple">
+<dt>Example::</dt><dd><p>cl1 = Classifier()
+cl2 = Classifier(‘test’)
+cl3 = Classifier(target=’test’)
+cl4 = Classifier(‘test’, ‘path/file’)
+cl5 = Classifier(target=’test’, filename=’path/file’)</p>
+</dd>
+</dl>
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.set_target">
-<code class="sig-name descname">set_target</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.set_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.set_target" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.Classifier.set_target">
+<code class="sig-name descname">set_target</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.set_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.Classifier.set_target" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the target variable and if the data value exists,
 the X and Y values are setted as well</p>
 <dl class="field-list simple">
@@ -59,8 +66,8 @@ the X and Y values are setted as well</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.read_csv">
-<code class="sig-name descname">read_csv</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.read_csv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.read_csv" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.Classifier.read_csv">
+<code class="sig-name descname">read_csv</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.read_csv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.Classifier.read_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a CSV file and separate the X and Y variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -79,8 +86,8 @@ the X and Y values are setted as well</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.standarize">
-<code class="sig-name descname">standarize</code><span class="sig-paren">(</span><em class="sig-param">normalizer</em>, <em class="sig-param">scaler</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.standarize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.standarize" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.Classifier.standarize">
+<code class="sig-name descname">standarize</code><span class="sig-paren">(</span><em class="sig-param">normalizer</em>, <em class="sig-param">scaler</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.standarize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.Classifier.standarize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a normalizer and scaler preprocessing steps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -93,8 +100,8 @@ the X and Y values are setted as well</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.split_classes">
-<code class="sig-name descname">split_classes</code><span class="sig-paren">(</span><em class="sig-param">label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.split_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.split_classes" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.Classifier.split_classes">
+<code class="sig-name descname">split_classes</code><span class="sig-paren">(</span><em class="sig-param">label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.split_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.Classifier.split_classes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the splited value of the dataset using the requested label</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -107,8 +114,8 @@ the X and Y values are setted as well</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.features_metrics">
-<code class="sig-name descname">features_metrics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.features_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.features_metrics" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.Classifier.features_metrics">
+<code class="sig-name descname">features_metrics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.features_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.Classifier.features_metrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks for each variable the probability of being splited</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -148,8 +155,8 @@ the X and Y values are setted as well</p>
 
 
 <h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">classification</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Project Modules</a></li>
 </ul>
 
 
@@ -175,7 +182,7 @@ the X and Y values are setted as well</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_autosummary/classification.rst.txt"
+      <a href="../_sources/_autosummary/silk_ml.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

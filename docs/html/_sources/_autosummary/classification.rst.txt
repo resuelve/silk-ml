@@ -1,19 +1,6 @@
-Classifier
+classification
 ==============
 
-.. autoclass:: classification::Classifier
-
-  .. rubric:: Functions
-
-   .. autosummary::
-    division
-
-   .. rubric:: Classes
-
-   .. autosummary::
-    Application
-
-
-
-
+.. automodule:: silk_ml.classification
+   :members:
 

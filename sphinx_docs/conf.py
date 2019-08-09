@@ -10,10 +10,8 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
-sys.path.insert(0, os.path.join(os.path.abspath(
-    os.path.dirname(os.path.dirname(__file__))), 'silk_ml'))
+import os, sys
+sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- Project information -----------------------------------------------------
@@ -23,7 +21,7 @@ copyright = '2019, Resuelve'
 author = 'Miguel Asencio'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.2'
+release = '0.0.3'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,6 +41,8 @@ extensions = [
 autodoc_member_order = 'bysource'
 # Default flags used by autodoc directives
 autodoc_default_flags = ['members', 'show-inheritance']
+# This value contains a list of modules to be mocked up
+autodoc_mock_imports = ['pandas', 'scipy', 'sklearn']
 # Generate autodoc stubs with summaries from code
 autosummary_generate = True
 
@@ -72,7 +72,7 @@ html_theme_options = {
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
+# so a file named 'default.css' will overwrite the builtin 'default.css'.
 # html_static_path = ['_static']
 
 # Sidebars configuration for alabaster theme

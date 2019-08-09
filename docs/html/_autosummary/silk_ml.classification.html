@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>classification &#8212; silk_ml 0.0.3 documentation</title>
+    <title>silk_ml.classification &#8212; silk_ml 0.0.3 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Welcome to silk_ml’s documentation!" href="../index.html" />
+    <link rel="prev" title="Project Modules" href="../modules.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -32,7 +32,19 @@
           <div class="body" role="main">
             
   <div class="section" id="module-silk_ml.classification">
-<span id="classification"></span><h1>classification<a class="headerlink" href="#module-silk_ml.classification" title="Permalink to this headline">¶</a></h1>
+<span id="silk-ml-classification"></span><h1>silk_ml.classification<a class="headerlink" href="#module-silk_ml.classification" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#silk_ml.classification.Classifier" title="silk_ml.classification.Classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Classifier</span></code></a>([target, filename])</p></td>
+<td><p>General tasks for classification and data analysis</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="class">
 <dt id="silk_ml.classification.Classifier">
 <em class="property">class </em><code class="sig-prename descclassname">silk_ml.classification.</code><code class="sig-name descname">Classifier</code><span class="sig-paren">(</span><em class="sig-param">target=None</em>, <em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier" title="Permalink to this definition">¶</a></dt>
@@ -44,6 +56,14 @@
 <li><p><strong>target</strong> (<em>string</em>) – categorical variable to classify</p></li>
 <li><p><strong>filename</strong> (<em>string</em>) – name with path for reading a csv file</p></li>
 </ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example::</dt><dd><p>cl1 = Classifier()
+cl2 = Classifier(‘test’)
+cl3 = Classifier(target=’test’)
+cl4 = Classifier(‘test’, ‘path/file’)
+cl5 = Classifier(target=’test’, filename=’path/file’)</p>
 </dd>
 </dl>
 <dl class="method">
@@ -149,7 +169,10 @@ the X and Y values are setted as well</p>
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">classification</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Project Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">silk_ml.classification</a></li>
+</ul>
+</li>
 </ul>
 
 
@@ -175,7 +198,7 @@ the X and Y values are setted as well</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/_autosummary/classification.rst.txt"
+      <a href="../_sources/_autosummary/silk_ml.classification.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
