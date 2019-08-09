@@ -6,10 +6,21 @@
 Welcome to silk_ml's documentation!
 ===================================
 
+:Source code: `github.com project <https://github.com/resuelve/silk-ml>`_
+:Bug tracker: `github.com issues <https://github.com/resuelve/silk-ml/issues>`_
+:Generated: |today|
+:License: MIT
+:Version: |release|
+
+Project Modules
+===============
+
+List of project's modules
+
 .. toctree::
    :maxdepth: 2
    
-   modules
+   _autosummary/classification.rst
 
 
 

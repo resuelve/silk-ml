@@ -9,13 +9,6 @@ class Classifier:
     :type target: string
     :param filename: name with path for reading a csv file
     :type filename: string
-
-    Example::
-        cl1 = Classifier()
-        cl2 = Classifier('test')
-        cl3 = Classifier(target='test')
-        cl4 = Classifier('test', 'path/file')
-        cl5 = Classifier(target='test', filename='path/file')
     '''
 
     def __init__(self, target=None, filename=None):
