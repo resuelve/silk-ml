@@ -5,7 +5,11 @@ test:
 publish: test publish.docs publish.package publish.pypi
 
 publish.docs:
-	sphinx-build -M html sphinx_docs docs
+	sphinx-build -M html sphinx_docs build_docs
+	rm -rf docs
+	mv build_docs/html ./docs
+	rm -rf build_docs
+	touch ./docs/.nojekyll
 
 publish.package:
 	rm -rf build
