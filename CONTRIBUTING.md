@@ -1,7 +1,7 @@
 # Contributing
+We are open for any idea and contribution, so please check that this is accomplished and enjoy coding!
 
 ## Adding features or fixing bugs
-
 * Fork the repo
 * Check out a feature or bug branch
 * Add your changes
@@ -11,6 +11,8 @@
 * Ensure tests are passing
 * Ensure branch is mergeable
 
-## Testing
-
-* Please make sure tests pass with `make test`
+## Check-list
+All the PRs must have this in account
+* Add the corresponding unit tests
+* Tests are still passing with `make test`
+* Update or add Sphinx documentation in the code
