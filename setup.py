@@ -13,7 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/resuelve/silk-ml',
-    packages=setuptools.find_packages(exclude=['sphinx_docs', 'docs', 'tests']),
+    packages=setuptools.find_packages(exclude=['sphinx_docs', 'docs']),
     python_requires='~=3.5',
     install_requires=[
         i.replace('\n', '')
