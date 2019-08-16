@@ -42,7 +42,7 @@ class Classifier:
         self.set_target(target)
         return self.X, self.Y, self.data
 
-    def standarize(self, normalizer, scaler):
+    def standardize(self, normalizer, scaler):
         ''' Applies a normalizer and scaler preprocessing steps
 
         :param normalizer: class that centers the data
