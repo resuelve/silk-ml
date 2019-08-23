@@ -21,6 +21,7 @@ List of project's modules
    :maxdepth: 2
    
    _autosummary/classification.rst
+   _autosummary/plots.rst
 
 
 
