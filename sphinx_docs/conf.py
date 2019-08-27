@@ -10,7 +10,8 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os, sys
+import os
+import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 
@@ -42,7 +43,14 @@ autodoc_member_order = 'bysource'
 # Default flags used by autodoc directives
 autodoc_default_flags = ['members', 'show-inheritance']
 # This value contains a list of modules to be mocked up
-autodoc_mock_imports = ['pandas', 'scipy', 'sklearn', 'matplotlib', 'seaborn']
+autodoc_mock_imports = [
+    'pandas',
+    'scipy',
+    'sklearn',
+    'matplotlib',
+    'seaborn',
+    'imblearn',
+]
 # Generate autodoc stubs with summaries from code
 autosummary_generate = True
 
