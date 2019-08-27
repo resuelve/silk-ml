@@ -1,6 +1,7 @@
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
+from sklearn.model_selection import StratifiedKFold
 
 
 def plot_corr(data, values=True):
@@ -85,4 +86,63 @@ def plot_numerical(positive, negative, numeric_var, target_name):
     plt.hist(negative, bins=25, alpha=0.6, label=f'not {target_name}')
     plt.xlabel(numeric_var, fontsize=12)
     plt.legend(loc='upper right')
+    plt.show()
+
+
+def single_cross_val(classifier, model_name, color, X, Y):
+    ''' Appends a ROC from the classifier
+
+    :param classifier: Model to run the classification task
+    :param model_name: Name to append to the plot
+    :type model_name: str
+    :param X: Main dataset with the variables
+    :type X: pd.DataFrame
+    :param Y: Target variable
+    :type Y: pd.Series
+    '''
+    cross_val = StratifiedKFold(n_splits=6)
+    tprs = []
+    aucs = []
+    mean_fpr = np.linspace(0, 1, 100)
+    X = np.array(X)
+    Y = np.array(Y)
+
+    for train, test in cross_val.split(X, Y):
+        probas = classifier.fit(X[train], Y[train]).predict_proba(X[test])
+        # Computa ROC
+        fpr, tpr, _ = roc_curve(Y[test], probas[:, 1])
+        tprs.append(interp(mean_fpr, fpr, tpr))
+        tprs[-1][0] = 0.0
+        roc_auc = auc(fpr, tpr)
+        aucs.append(roc_auc)
+
+    mean_tpr = np.mean(tprs, axis=0)
+    mean_tpr[-1] = 1.0
+    mean_auc = auc(mean_fpr, mean_tpr)
+    std_auc = np.std(aucs)
+    label = f'{model_name} (AUC = {mean_auc:.2f} +/- {std_auc:.2f})'
+    plt.plot(mean_fpr, mean_tpr, color=color, lw=2, alpha=0.8, label=label)
+
+
+def plot_roc_cross_val(X, Y, models):
+    ''' Plots all the models with their ROC
+
+    :param X: Main dataset with the variables
+    :type X: pd.DataFrame
+    :param Y: Target variable
+    :type Y: pd.Series
+    :param models: Models to evaluate
+    :type models: list(tuple)
+    '''
+    color_map = plt.cm.get_cmap('hsv', len(models))
+    for i, (model_name, model) in enumerate(models):
+        single_cross_val(model, model_name, color_map(i), X, Y)
+    plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='0.75', alpha=0.8,
+             label='Baseline')
+    plt.xlim([-0.01, 1.01])
+    plt.ylim([-0.01, 1.01])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic curve')
+    plt.legend(loc='lower right')
     plt.show()

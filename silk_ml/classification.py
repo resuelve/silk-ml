@@ -1,6 +1,8 @@
 import pandas as pd
-from scipy.stats import ttest_ind, chi2_contingency
-from .plots import plot_corr, plot_mainfold, plot_numerical, plot_categorical
+
+from .features import features_metrics
+from .plots import plot_corr, plot_mainfold, plot_roc_cross_val
+from .imbalanced import resample
 
 
 class Classifier:
@@ -67,18 +69,6 @@ class Classifier:
 
         return scaler.fit_transform(normalized.transpose())
 
-    def split_classes(self, label):
-        ''' Returns the splited value of the dataset using the requested label
-
-        :param label: Name of the variable to split
-        :type label: str
-        :return: The `positive` and `negative` data splited
-        :rtype: tuple(pd.Series, pd.Series)
-        '''
-        positive = self.X.loc[self.data[self.target] == 1][label]
-        negative = self.X.loc[self.data[self.target] != 1][label]
-        return positive, negative
-
     def features_metrics(self, plot=None):
         ''' Checks for each variable the probability of being splited
 
@@ -87,27 +77,38 @@ class Classifier:
         :return: Table of variables and their classification tests
         :rtype: pd.DataFrame
         '''
-        plot_cat = plot in ['all', 'categorical']
-        plot_num = plot in ['all', 'numerical']
+        return features_metrics(self.X, self.Y, self.targetname, plot)
 
-        features = {}
-        features_cols = ['cardinality kind', 'split probability']
-        for column in self.X.columns.tolist():
-            # Categorical case
-            if len(self.X[column].unique().tolist()) <= 2:
-                if plot_cat:
-                    plot_categorical(self.X, self.Y, column, self.targetname)
-                cont_table = pd.crosstab(self.Y, self.X[column], margins=False)
-                test = chi2_contingency(cont_table.values)
-                features[column] = ['categorical', f'{(test[1] * 100):.4f}%']
-            # Numerical case
-            else:
-                positive, negative = self.split_classes(column)
-                if plot_num:
-                    plot_numerical(positive, negative, column, self.targetname)
-                _, p_value = ttest_ind(positive, negative)
-                features[column] = ['numerical', f'{(p_value * 100):.4f}%']
-        return pd.DataFrame(features, index=features_cols)
+    def remove_features(self, features):
+        ''' Remove features from the X values
+
+        :param features: Column's names to remove
+        :type features: list(str)
+        '''
+        self.X = self.X.drop(columns=features)
+
+    def resample(self, rate=0.9, strategy='hibrid'):
+        ''' Sampling based methods to balance dataset
+
+        :param rate: Ratio of the number of samples in the minority class over
+            the number of samples in the majority class after resampling
+        :type rate: float
+        :param strategy: Strategy to balance the dataset
+        :type strategy: 'hybrid' or 'over_sampling' or 'under_sampling'
+        '''
+        self.X, self.Y = resample(self.X, self.Y, rate, strategy)
+
+    def cross_validation(self, models, scores, iterations=30):
+        ''' Validates several models and scores
+
+        :param models: Models to evaluate
+        :type models: list(tuple)
+        :param scores: Scores to measure the models
+        :type scores: list(tuple)
+        :param iterations: Number of iteration over the cross validation
+        :type iterations: int
+        '''
+        return cross_validation(self.X, self.Y, models, scores, iterations)
 
     def plot_corr(self, values=True):
         ''' Plots the correlation matrix
@@ -124,3 +125,11 @@ class Classifier:
         :type method: Class.fit_transform
         '''
         plot_mainfold(method, self.data, self.targetname)
+
+    def plot_roc_cross_val(self, models):
+        ''' Plots all the models with their ROC
+
+        :param models: Models to evaluate
+        :type models: list(tuple)
+        '''
+        plot_roc_cross_val(self.X, self.Y, models)
