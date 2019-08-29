@@ -4,7 +4,7 @@ from scipy.stats import chi2_contingency, ttest_ind
 from .plots import plot_categorical, plot_numerical
 
 
-def split_classes(X, data, target, label):
+def split_classes(X, Y, label):
     ''' Returns the splited value of the dataset using the requested label
 
     :param X: Main dataset with the variables
@@ -18,8 +18,8 @@ def split_classes(X, data, target, label):
     :return: The `positive` and `negative` data splited
     :rtype: tuple(pd.Series, pd.Series)
     '''
-    positive = X.loc[data[target] == 1][label]
-    negative = X.loc[data[target] != 1][label]
+    positive = X.loc[Y == 1][label]
+    negative = X.loc[Y != 1][label]
     return positive, negative
 
 
@@ -52,7 +52,7 @@ def features_metrics(X, Y, targetname, plot=None):
             features[column] = ['categorical', f'{(test[1] * 100):.4f}%']
         # Numerical case
         else:
-            positive, negative = split_classes(column)
+            positive, negative = split_classes(X, Y, column)
             if plot_num:
                 plot_numerical(positive, negative, column, targetname)
             _, p_value = ttest_ind(positive, negative)
