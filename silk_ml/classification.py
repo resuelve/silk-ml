@@ -18,12 +18,17 @@ class Classifier:
 
     def __init__(self, target=None, filename=None, targetname=None):
         pd.set_option('display.max_columns', None)
-        self.target = target
+        self._target = target
         self.targetname = targetname
         if (filename and target):
             self.read_csv(target, filename)
 
-    def set_target(self, target, targetname=None):
+    @property
+    def target(self):
+        return self._target
+
+    @target.setter
+    def target(self, target):
         ''' Sets the target variable and if the data value exists,
         the X and Y values are setted as well
 
@@ -32,8 +37,7 @@ class Classifier:
         :param targetname: Target name for reports
         :type targetname: str or None
         '''
-        self.target = target
-        self.targetname = self.targetname or targetname
+        self._target = target
         if self.data is not None:
             self.Y = self.data[target]
             self.X = self.data.drop(columns=[target])
@@ -49,10 +53,10 @@ class Classifier:
         :rtype: list(pd.DataFrame)
         '''
         self.data = pd.read_csv(filename)
-        self.set_target(target)
+        self.target = target
         return self.X, self.Y, self.data
 
-    def standarize(self, normalizer, scaler):
+    def standardize(self, normalizer, scaler):
         ''' Applies a normalizer and scaler preprocessing steps
 
         :param normalizer: Class that centers the data
