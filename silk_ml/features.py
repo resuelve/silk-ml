@@ -24,7 +24,7 @@ def split_classes(X, data, target, label):
 
 
 def features_metrics(X, Y, targetname, plot=None):
-    ''' Checks for each variable the probability of being splited
+    ''' Determines the likelihood from each variable of splitting correctly the dataset
 
     :param X: Main dataset with the variables
     :type X: pd.DataFrame
