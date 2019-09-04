@@ -102,7 +102,7 @@ class Classifier:
         '''
         self.X, self.Y = resample(self.X, self.Y, rate, strategy)
 
-    def cross_validation(self, models, scores, folds=30, folds=):
+    def cross_validation(self, models, scores, folds=30):
         ''' Validates several models and scores
 
         :param models: Models to evaluate
