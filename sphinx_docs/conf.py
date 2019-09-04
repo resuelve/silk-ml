@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
 ]
 
 # Include Python objects as they appear in source files
@@ -98,3 +99,8 @@ html_show_sourcelink = True
 # Add Python version number to the default address to corretcly reference
 # the Python standard library
 intersphinx_mapping = {'https://docs.python.org/3.7': None}
+
+# Napoleon configuration
+napoleon_include_private_with_doc = False
+napoleon_google_docstring = True
+napoleon_numpy_docstring = False

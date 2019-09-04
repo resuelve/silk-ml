@@ -7,10 +7,9 @@ from sklearn.model_selection import StratifiedKFold
 def plot_corr(data, values=True):
     ''' Plots correlation matrix
 
-    :param data: Data to compute correlation matrix
-    :type data: pd.DataFrame
-    :param data: Data to compute correlation matrix
-    :type data: bool or None
+    Args:
+        data (pd.DataFrame): Data to compute correlation matrix
+        values (bool or None): Plot values in the matrix
     '''
     corr = data.corr()
     _fig, ax = plt.subplots(figsize=(50 if values else 20, 10))
@@ -21,10 +20,9 @@ def plot_corr(data, values=True):
 def plot_mainfold(method, data, target_name):
     ''' Plots the information using dimentionality reduction
 
-    :param method: Mainfold transformation method
-    :type method: Class.fit_transform
-    :param data: Dataset to reduce, with two classes
-    :type data: pd.DataFrame
+    Args:
+        method (Class.fit_transform): Mainfold transformation method
+        data (pd.DataFrame): Dataset to reduce, with two classes
     '''
     data_compacted = method.fit_transform(data)
     _fig, ax = plt.subplots()
@@ -53,14 +51,11 @@ def plot_mainfold(method, data, target_name):
 def plot_categorical(X, Y, catego_var, target_name):
     ''' Plots the categorical variable, showing the two classes
 
-    :param X: Main dataset with the categorical variables
-    :type X: pd.DataFrame
-    :param Y: Target variable
-    :type Y: pd.Series
-    :param catego_var: Name of the categorical variable to plot
-    :type catego_var: str
-    :param target_name: Name of the target variable to classify
-    :type target_name: str
+    Args:
+        X (pd.DataFrame): Main dataset with the categorical variables
+        Y (pd.Series): Target variable
+        catego_var (str): Name of the categorical variable to plot
+        target_name (str): Name of the target variable to classify
     '''
     X_copy = X.copy()
     X_copy[target_name] = pd.Series(Y).map(
@@ -73,14 +68,11 @@ def plot_categorical(X, Y, catego_var, target_name):
 def plot_numerical(positive, negative, numeric_var, target_name):
     ''' Plots the information using dimentionality reduction
 
-    :param positive: Serie with the positive class to plot
-    :type positive: pd.Series
-    :param negative: Serie with the negative class to plot
-    :type negative: pd.Series
-    :param numeric_var: Name of the numerical variable to plot
-    :type numeric_var: str
-    :param target_name: Name of the target variable to classify
-    :type target_name: str
+    Args:
+        positive (pd.Series): Serie with the positive class to plot
+        negative (pd.Series): Serie with the negative class to plot
+        numeric_var (str): Name of the numerical variable to plot
+        target_name (str): Name of the target variable to classify
     '''
     plt.hist(positive, bins=25, alpha=0.6, label=target_name)
     plt.hist(negative, bins=25, alpha=0.6, label=f'not {target_name}')
@@ -92,13 +84,11 @@ def plot_numerical(positive, negative, numeric_var, target_name):
 def single_cross_val(classifier, model_name, color, X, Y):
     ''' Appends a ROC from the classifier
 
-    :param classifier: Model to run the classification task
-    :param model_name: Name to append to the plot
-    :type model_name: str
-    :param X: Main dataset with the variables
-    :type X: pd.DataFrame
-    :param Y: Target variable
-    :type Y: pd.Series
+    Args:
+        classifier (str): Model to run the classification task
+        to append to the plot
+        X (pd.DataFrame): Main dataset with the variables
+        Y (pd.Series): Target variable
     '''
     cross_val = StratifiedKFold(n_splits=6)
     tprs = []
@@ -127,12 +117,10 @@ def single_cross_val(classifier, model_name, color, X, Y):
 def plot_roc_cross_val(X, Y, models):
     ''' Plots all the models with their ROC
 
-    :param X: Main dataset with the variables
-    :type X: pd.DataFrame
-    :param Y: Target variable
-    :type Y: pd.Series
-    :param models: Models to evaluate
-    :type models: list(tuple)
+    Args:
+        X (pd.DataFrame): Main dataset with the variables
+        Y (pd.Series): Target variable
+        models (list(tuple)): Models to evaluate
     '''
     color_map = plt.cm.get_cmap('hsv', len(models))
     for i, (model_name, model) in enumerate(models):

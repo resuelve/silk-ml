@@ -1,19 +1,16 @@
 import pandas as pd
 from sklearn.model_selection import cross_validate
 
+
 def cross_validation(X, Y, models, scores, folds=30):
     ''' Validates several models and scores
 
-    :param X: Main dataset with the variables
-    :type X: pd.DataFrame
-    :param Y: Target variable
-    :type Y: pd.Series
-    :param models: Models to evaluate
-    :type models: list(tuple)
-    :param scores: Scores to measure the models
-    :type scores: list(tuple)
-    :param folds: Number of folds in a (Stratified)KFold
-    :type folds: int
+    Args:
+        X (pd.DataFrame): Main dataset with the variables
+        Y (pd.Series): Target variable
+        models (list(tuple)): Models to evaluate
+        scores (list(tuple)): Scores to measure the models
+        folds (int): Number of folds in a (Stratified)KFold
     '''
     score_table = {}
     for model_name, model in models:

@@ -8,15 +8,13 @@ from imblearn.under_sampling import EditedNearestNeighbours
 def resample(X, Y, rate=0.9, strategy='hybrid'):
     ''' Sampling based methods to balance dataset
 
-    :param X: Main dataset with the variables
-    :type X: pd.DataFrame
-    :param Y: Target variable
-    :type Y: pd.Series
-    :param rate: Ratio of the number of samples in the minority class over the
-        number of samples in the majority class after resampling
-    :type rate: float
-    :param strategy: Strategy to balance the dataset
-    :type strategy: 'hybrid' | 'over_sampling' | 'under_sampling'
+    Args:
+        X (pd.DataFrame): Main dataset with the variables
+        Y (pd.Series): Target variable
+        rate (float): Ratio of the number of samples in the minority class over
+            the number of samples in the majority class after resampling
+        strategy ('hybrid' | 'over_sampling' | 'under_sampling'): Strategy to
+            balance the dataset
     '''
     strategies = {
         'hybrid': SMOTEENN(sampling_strategy=rate),

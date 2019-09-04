@@ -8,12 +8,10 @@ from .imbalanced import resample
 class Classifier:
     ''' General tasks for classification and data analysis
 
-    :param target: Categorical variable to classify
-    :type target: str or None
-    :param filename: Name with path for reading a csv file
-    :type filename: str or None
-    :param targetname: Target name for reports
-    :type targetname: str or None
+    Args:
+        target (str or None): Categorical variable to classify
+        filename (str or None): Name with path for reading a csv file
+        targetname (str or None): Target name for reports
     '''
 
     def __init__(self, target=None, filename=None, targetname=None):
@@ -32,10 +30,9 @@ class Classifier:
         ''' Sets the target variable and if the data value exists,
         the X and Y values are setted as well
 
-        :param target: Categorical variable to classify
-        :type target: str
-        :param targetname: Target name for reports
-        :type targetname: str or None
+        Args:
+            target (str): Categorical variable to classify
+            targetname (str or None): Target name for reports
         '''
         self._target = target
         if self.data is not None:
@@ -45,12 +42,12 @@ class Classifier:
     def read_csv(self, target, filename):
         ''' Reads a CSV file and separate the X and Y variables
 
-        :param target: Categorical variable to classify
-        :type target: str
-        :param filename: Name with path for reading a csv file
-        :type filename: str
-        :return: `X`, `Y`, and `data` values
-        :rtype: list(pd.DataFrame)
+        Args:
+            target (str): Categorical variable to classify
+            filename (str): Name with path for reading a csv file
+
+        Returns:
+            list(pd.DataFrame): `X`, `Y`, and `data` values
         '''
         self.data = pd.read_csv(filename)
         self.target = target
@@ -59,10 +56,9 @@ class Classifier:
     def standardize(self, normalizer, scaler):
         ''' Applies a normalizer and scaler preprocessing steps
 
-        :param normalizer: Class that centers the data
-        :type normalizer: Class.fit_transform
-        :param scaler: Class that modifies the data boundaries
-        :type scaler: Class.fit_transform
+        Args:
+            normalizer (Class.fit_transform): Class that centers the data
+            scaler (Class.fit_transform): Class that modifies the data boundaries
         '''
         normalized = normalizer.fit_transform(self.X).transpose()
 
@@ -76,64 +72,65 @@ class Classifier:
     def features_metrics(self, plot=None):
         ''' Checks for each variable the probability of being splited
 
-        :param plot: Plots the variables, showing the difference in the classes
-        :type plot: 'all' or 'categorical' or 'numerical' or None
-        :return: Table of variables and their classification tests
-        :rtype: pd.DataFrame
+        Args:
+            plot ('all' or 'categorical' or 'numerical' or None): Plots the
+                variables, showing the difference in the classes
+        
+        Returns:
+            pd.DataFrame: Table of variables and their classification tests
         '''
         return features_metrics(self.X, self.Y, self.targetname, plot)
 
     def remove_features(self, features):
         ''' Remove features from the X values
 
-        :param features: Column's names to remove
-        :type features: list(str)
+        Args:
+            features (list(str)): Column's names to remove
         '''
         self.X = self.X.drop(columns=features)
 
     def resample(self, rate=0.9, strategy='hybrid'):
         ''' Sampling based methods to balance dataset
 
-        :param rate: Ratio of the number of samples in the minority class over
-            the number of samples in the majority class after resampling
-        :type rate: float
-        :param strategy: Strategy to balance the dataset
-        :type strategy: 'hybrid' or 'over_sampling' or 'under_sampling'
+        Args:
+            rate (float): Ratio of the number of samples in the minority class
+                over the number of samples in the majority class after
+                resampling
+            strategy ('hybrid' or 'over_sampling' or 'under_sampling'): Strategy
+                to balance the dataset
         '''
         self.X, self.Y = resample(self.X, self.Y, rate, strategy)
 
     def cross_validation(self, models, scores, folds=30):
         ''' Validates several models and scores
 
-        :param models: Models to evaluate
-        :type models: list(tuple)
-        :param scores: Scores to measure the models
-        :type scores: list(tuple)
-        :param folds: Number of folds in a (Stratified)KFold
-        :type folds: int
+        Args:
+            models (list(tuple)): Models to evaluate
+            scores (list(tuple)): Scores to measure the models
+            folds (int): Number of folds in a (Stratified)KFold
         '''
         return cross_validation(self.X, self.Y, models, scores, folds)
 
     def plot_corr(self, values=True):
         ''' Plots the correlation matrix
 
-        :param values: Shows each of the correlation values
-        :type values: bool
+        Args:
+            values (bool): Shows each of the correlation values
         '''
         plot_corr(self.data, values)
 
     def plot_mainfold(self, method):
         ''' Plots the reduced space using a mainfold transformation
 
-        :param method: Mainfold transformation method
-        :type method: Class.fit_transform
+        Args:
+            method (Class.fit_transform): Mainfold transformation method
         '''
         plot_mainfold(method, self.data, self.targetname)
 
     def plot_roc_cross_val(self, models):
         ''' Plots all the models with their ROC
 
-        :param models: Models to evaluate
-        :type models: list(tuple)
+        Args:
+            models (list(tuple)): Models to evaluate
         '''
         plot_roc_cross_val(self.X, self.Y, models)
