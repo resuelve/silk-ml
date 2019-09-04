@@ -6,5 +6,5 @@ from .imbalanced import resample
 from .train import cross_validation
 
 __name__ = 'silk_ml'
-__version__ = '1.0.0'
+__version__ = '0.1.0'
 __all__ = ['classification', 'plots', 'features', 'imbalanced', 'train']
