@@ -1,3 +1,5 @@
+import pandas as pd
+
 from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import EditedNearestNeighbours
@@ -21,7 +23,7 @@ def resample(X, Y, rate=0.9, strategy='hybrid'):
         'over_sampling': SMOTE(sampling_strategy=rate),
         'under_sampling': EditedNearestNeighbours(),
     }
-    resampling = strategies[hibrid]
+    resampling = strategies[strategy]
     cols = X.columns
     X_r, Y_r = resampling.fit_resample(X, Y)
     return pd.DataFrame(data=X_r, columns=cols), Y_r

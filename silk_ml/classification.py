@@ -91,7 +91,7 @@ class Classifier:
         '''
         self.X = self.X.drop(columns=features)
 
-    def resample(self, rate=0.9, strategy='hibrid'):
+    def resample(self, rate=0.9, strategy='hybrid'):
         ''' Sampling based methods to balance dataset
 
         :param rate: Ratio of the number of samples in the minority class over
