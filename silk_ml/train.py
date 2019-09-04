@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import cross_validate
 
-def cross_validation(X, Y, models, scores, iterations=30):
+def cross_validation(X, Y, models, scores, folds=30):
     ''' Validates several models and scores
 
     :param X: Main dataset with the variables
@@ -12,12 +12,12 @@ def cross_validation(X, Y, models, scores, iterations=30):
     :type models: list(tuple)
     :param scores: Scores to measure the models
     :type scores: list(tuple)
-    :param iterations: Number of iteration over the cross validation
-    :type iterations: int
+    :param folds: Number of folds in a (Stratified)KFold
+    :type folds: int
     '''
     score_table = {}
     for model_name, model in models:
-        scores_res = cross_validate(model, X, Y, cv=iterations, scoring=scores)
+        scores_res = cross_validate(model, X, Y, cv=folds, scoring=scores)
         score_table[model_name] = []
         for name in scores.keys():
             res = scores_res[f'test_{name}']

@@ -102,17 +102,17 @@ class Classifier:
         '''
         self.X, self.Y = resample(self.X, self.Y, rate, strategy)
 
-    def cross_validation(self, models, scores, iterations=30):
+    def cross_validation(self, models, scores, folds=30, folds=):
         ''' Validates several models and scores
 
         :param models: Models to evaluate
         :type models: list(tuple)
         :param scores: Scores to measure the models
         :type scores: list(tuple)
-        :param iterations: Number of iteration over the cross validation
-        :type iterations: int
+        :param folds: Number of folds in a (Stratified)KFold
+        :type folds: int
         '''
-        return cross_validation(self.X, self.Y, models, scores, iterations)
+        return cross_validation(self.X, self.Y, models, scores, folds)
 
     def plot_corr(self, values=True):
         ''' Plots the correlation matrix
