@@ -18,7 +18,7 @@ class TestClassification(unittest.TestCase):
 
         # Check kind of values, p-values are variables
         self.assertEqual(
-            metrics.loc['cardinality kind'].tolist(),
+            metrics['cardinality kind'].tolist(),
             ['numerical', 'numerical', 'categorical']
         )
 

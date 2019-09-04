@@ -41,20 +41,41 @@ def features_metrics(X, Y, targetname, plot=None):
     plot_num = plot in ['all', 'numerical']
 
     features = {}
-    features_cols = ['cardinality kind', 'split probability']
-    for column in X.columns.tolist():
-        # Categorical case
-        if len(X[column].unique().tolist()) <= 2:
-            if plot_cat:
-                plot_categorical(X, Y, column, targetname)
-            cont_table = pd.crosstab(Y, X[column], margins=False)
-            test = chi2_contingency(cont_table.values)
-            features[column] = ['categorical', f'{(test[1] * 100):.4f}%']
-        # Numerical case
+    columns = X.columns.tolist()
+
+    def is_categorical(column): return len(X[column].unique().tolist()) <= 2
+
+    def test_variable(column):
+        if is_categorical(column):
+            test, plot = _test_categorical, plot_cat 
         else:
-            positive, negative = split_classes(X, Y, column)
-            if plot_num:
-                plot_numerical(positive, negative, column, targetname)
-            _, p_value = ttest_ind(positive, negative)
-            features[column] = ['numerical', f'{(p_value * 100):.4f}%']
-    return pd.DataFrame(features, index=features_cols)
+            test, plot = _test_numerical, plot_num 
+        return test(X, Y, column, targetname, plot)
+    
+    features = {
+        'cardinality kind': [
+            'categorical' if is_categorical(column) else 'numerical'
+            for column in columns
+        ],
+        'split probability': [
+            f'{(100 - test_variable(column) * 100):.4f} %'
+            for column in columns
+        ],
+    }
+    return pd.DataFrame(features, index=columns)
+
+
+def _test_categorical(X, Y, column, targetname, plot_cat):
+    if plot_cat:
+        plot_categorical(X, Y, column, targetname)
+    cont_table = pd.crosstab(Y, X[column], margins=False)
+    test = chi2_contingency(cont_table.values)
+    return test[1]
+
+
+def _test_numerical(X, Y, column, targetname, plot_num):
+    positive, negative = split_classes(X, Y, column)
+    if plot_num:
+        plot_numerical(positive, negative, column, targetname)
+    _, p_value = ttest_ind(positive, negative)
+    return p_value
