@@ -22,7 +22,7 @@ copyright = '2019, Resuelve'
 author = 'Miguel Asencio'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.1.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -51,6 +51,7 @@ autodoc_mock_imports = [
     'matplotlib',
     'seaborn',
     'imblearn',
+    'numpy',
 ]
 # Generate autodoc stubs with summaries from code
 autosummary_generate = True

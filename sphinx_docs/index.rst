@@ -28,11 +28,12 @@ List of project's modules
 .. toctree::
    :maxdepth: 2
    
-   _autosummary/classification.rst
-   _autosummary/features.rst
-   _autosummary/imbalanced.rst
-   _autosummary/plots.rst
-   _autosummary/train.rst
+    _autosummary/classification.rst
+    _autosummary/features.rst
+    _autosummary/imbalanced.rst
+    _autosummary/plots.rst
+    _autosummary/train.rst
+    _autosummary/scores.rst
 
 
 
