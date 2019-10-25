@@ -1,5 +1,5 @@
 test:
-	python3 -m unittest discover
+	python3 -m unittest tests/test_*
 
 # Publish commands
 publish: test publish.docs publish.package publish.pypi

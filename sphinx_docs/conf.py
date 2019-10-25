@@ -10,7 +10,8 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os, sys
+import os
+import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 
@@ -21,7 +22,7 @@ copyright = '2019, Resuelve'
 author = 'Miguel Asencio'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.3'
+release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -34,6 +35,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
 ]
 
 # Include Python objects as they appear in source files
@@ -42,7 +44,14 @@ autodoc_member_order = 'bysource'
 # Default flags used by autodoc directives
 autodoc_default_flags = ['members', 'show-inheritance']
 # This value contains a list of modules to be mocked up
-autodoc_mock_imports = ['pandas', 'scipy', 'sklearn']
+autodoc_mock_imports = [
+    'pandas',
+    'scipy',
+    'sklearn',
+    'matplotlib',
+    'seaborn',
+    'imblearn',
+]
 # Generate autodoc stubs with summaries from code
 autosummary_generate = True
 
@@ -67,13 +76,12 @@ html_theme_options = {
     'github_type': 'star&v=2',
     'github_user': 'resuelve',
     'github_repo': 'silk-ml',
-    'github_banner': True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named 'default.css' will overwrite the builtin 'default.css'.
-# html_static_path = ['_static']
+html_static_path = ['_static']
 
 # Sidebars configuration for alabaster theme
 
@@ -90,4 +98,9 @@ html_show_sourcelink = True
 
 # Add Python version number to the default address to corretcly reference
 # the Python standard library
-intersphinx_mapping = {'https://docs.python.org/3.5': None}
+intersphinx_mapping = {'https://docs.python.org/3.7': None}
+
+# Napoleon configuration
+napoleon_include_private_with_doc = False
+napoleon_google_docstring = True
+napoleon_numpy_docstring = False

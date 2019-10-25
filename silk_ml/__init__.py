@@ -1,5 +1,10 @@
 from .classification import Classifier
+from .plots import plot_corr, plot_mainfold, plot_categorical, plot_numerical
+from .plots import plot_roc_cross_val
+from .features import split_classes, features_metrics
+from .imbalanced import resample
+from .train import cross_validation
 
 __name__ = 'silk_ml'
-__version__ = '0.0.3'
-__all__ = ['Classifier']
+__version__ = '0.1.0'
+__all__ = ['classification', 'plots', 'features', 'imbalanced', 'train']

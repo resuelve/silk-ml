@@ -1,29 +1,40 @@
 import pandas as pd
-from scipy.stats import ttest_ind, chi2_contingency
+
+from .features import features_metrics
+from .plots import plot_corr, plot_mainfold, plot_roc_cross_val
+from .imbalanced import resample
 
 
 class Classifier:
     ''' General tasks for classification and data analysis
 
-    :param target: categorical variable to classify
-    :type target: string
-    :param filename: name with path for reading a csv file
-    :type filename: string
+    Args:
+        target (str or None): Categorical variable to classify
+        filename (str or None): Name with path for reading a csv file
+        targetname (str or None): Target name for reports
     '''
 
-    def __init__(self, target=None, filename=None):
-        self.target = target
+    def __init__(self, target=None, filename=None, targetname=None):
+        pd.set_option('display.max_columns', None)
+        self._target = target
+        self.targetname = targetname
         if (filename and target):
             self.read_csv(target, filename)
 
-    def set_target(self, target):
+    @property
+    def target(self):
+        return self._target
+
+    @target.setter
+    def target(self, target):
         ''' Sets the target variable and if the data value exists,
         the X and Y values are setted as well
 
-        :param target: categorical variable to classify
-        :type target: string
+        Args:
+            target (str): Categorical variable to classify
+            targetname (str or None): Target name for reports
         '''
-        self.target = target
+        self._target = target
         if self.data is not None:
             self.Y = self.data[target]
             self.X = self.data.drop(columns=[target])
@@ -31,24 +42,23 @@ class Classifier:
     def read_csv(self, target, filename):
         ''' Reads a CSV file and separate the X and Y variables
 
-        :param target: categorical variable to classify
-        :type target: string
-        :param filename: name with path for reading a csv file
-        :type filename: string
-        :return: `X`, `Y`, and `data` values
-        :rtype: list(DataFrame)
+        Args:
+            target (str): Categorical variable to classify
+            filename (str): Name with path for reading a csv file
+
+        Returns:
+            list(pd.DataFrame): `X`, `Y`, and `data` values
         '''
         self.data = pd.read_csv(filename)
-        self.set_target(target)
+        self.target = target
         return self.X, self.Y, self.data
 
-    def standarize(self, normalizer, scaler):
+    def standardize(self, normalizer, scaler):
         ''' Applies a normalizer and scaler preprocessing steps
 
-        :param normalizer: class that centers the data
-        :type normalizer: implements `fit_transform` method
-        :param scaler: class that modifies the data boundaries
-        :type scaler: implements `fit_transform` method
+        Args:
+            normalizer (Class.fit_transform): Class that centers the data
+            scaler (Class.fit_transform): Class that modifies the data boundaries
         '''
         normalized = normalizer.fit_transform(self.X).transpose()
 
@@ -57,36 +67,70 @@ class Classifier:
             if normalized[i].var() <= 1e-10:
                 normalized[i] = self.X[column]
 
-        standard = scaler.fit_transform(normalized.transpose())
-        self.X.loc[:, :] = standard
+        return scaler.fit_transform(normalized.transpose())
 
-    def split_classes(self, label):
-        ''' Returns the splited value of the dataset using the requested label
-        
-        :return: the `positive` and `negative` data splited
-        :rtype: (list, list)
-        '''
-        positive = self.X.loc[self.data[self.target] == 1][label]
-        negative = self.X.loc[self.data[self.target] != 1][label]
-        return positive, negative
-
-    def features_metrics(self):
+    def features_metrics(self, plot=None):
         ''' Checks for each variable the probability of being splited
 
-        :return: table of variables and their classification tests
-        :rtype: DataFrame
+        Args:
+            plot ('all' or 'categorical' or 'numerical' or None): Plots the
+                variables, showing the difference in the classes
+        
+        Returns:
+            pd.DataFrame: Table of variables and their classification tests
         '''
-        features = {}
-        features_cols = ['cardinality kind', 'split probability']
-        for column in self.X.columns.tolist():
-            # Categorical case
-            if len(self.X[column].unique().tolist()) <= 2:
-                cont_table = pd.crosstab(self.Y, self.X[column], margins=False)
-                test = chi2_contingency(cont_table.values)
-                features[column] = ['categorical', f'{(test[1] * 100):.4f}%']
-            # Numerical case
-            else:
-                positive, negative = self.split_classes(column)
-                _, p_value = ttest_ind(positive, negative)
-                features[column] = ['numerical', f'{(p_value * 100):.4f}%']
-        return pd.DataFrame(features, index=features_cols)
+        return features_metrics(self.X, self.Y, self.targetname, plot)
+
+    def remove_features(self, features):
+        ''' Remove features from the X values
+
+        Args:
+            features (list(str)): Column's names to remove
+        '''
+        self.X = self.X.drop(columns=features)
+
+    def resample(self, rate=0.9, strategy='hybrid'):
+        ''' Sampling based methods to balance dataset
+
+        Args:
+            rate (float): Ratio of the number of samples in the minority class
+                over the number of samples in the majority class after
+                resampling
+            strategy ('hybrid' or 'over_sampling' or 'under_sampling'): Strategy
+                to balance the dataset
+        '''
+        self.X, self.Y = resample(self.X, self.Y, rate, strategy)
+
+    def cross_validation(self, models, scores, folds=30):
+        ''' Validates several models and scores
+
+        Args:
+            models (list(tuple)): Models to evaluate
+            scores (list(tuple)): Scores to measure the models
+            folds (int): Number of folds in a (Stratified)KFold
+        '''
+        return cross_validation(self.X, self.Y, models, scores, folds)
+
+    def plot_corr(self, values=True):
+        ''' Plots the correlation matrix
+
+        Args:
+            values (bool): Shows each of the correlation values
+        '''
+        plot_corr(self.data, values)
+
+    def plot_mainfold(self, method):
+        ''' Plots the reduced space using a mainfold transformation
+
+        Args:
+            method (Class.fit_transform): Mainfold transformation method
+        '''
+        plot_mainfold(method, self.data, self.targetname)
+
+    def plot_roc_cross_val(self, models):
+        ''' Plots all the models with their ROC
+
+        Args:
+            models (list(tuple)): Models to evaluate
+        '''
+        plot_roc_cross_val(self.X, self.Y, models)
