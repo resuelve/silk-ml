@@ -1,16 +1,18 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import seaborn as sns
+from sklearn.metrics import roc_curve, auc
 from sklearn.model_selection import StratifiedKFold
 
 
 def plot_corr(data, values=True):
-    ''' Plots correlation matrix
+    """ Plots correlation matrix
 
     Args:
         data (pd.DataFrame): Data to compute correlation matrix
         values (bool or None): Plot values in the matrix
-    '''
+    """
     corr = data.corr()
     _fig, ax = plt.subplots(figsize=(50 if values else 20, 10))
     sns.set(style='white')
@@ -18,12 +20,13 @@ def plot_corr(data, values=True):
 
 
 def plot_mainfold(method, data, target_name):
-    ''' Plots the information using dimentionality reduction
+    """ Plots the information using dimensionality reduction
 
     Args:
         method (Class.fit_transform): Mainfold transformation method
         data (pd.DataFrame): Dataset to reduce, with two classes
-    '''
+        target_name (str): Name of the variable to classify
+    """
     data_compacted = method.fit_transform(data)
     _fig, ax = plt.subplots()
     win_x = []
@@ -49,14 +52,14 @@ def plot_mainfold(method, data, target_name):
 
 
 def plot_categorical(X, Y, catego_var, target_name):
-    ''' Plots the categorical variable, showing the two classes
+    """ Plots the categorical variable, showing the two classes
 
     Args:
         X (pd.DataFrame): Main dataset with the categorical variables
         Y (pd.Series): Target variable
         catego_var (str): Name of the categorical variable to plot
         target_name (str): Name of the target variable to classify
-    '''
+    """
     X_copy = X.copy()
     X_copy[target_name] = pd.Series(Y).map(
         lambda x: target_name if x == 1 else f'not {target_name}'
@@ -66,14 +69,14 @@ def plot_categorical(X, Y, catego_var, target_name):
 
 
 def plot_numerical(positive, negative, numeric_var, target_name):
-    ''' Plots the information using dimentionality reduction
+    """ Plots the information using dimentionality reduction
 
     Args:
         positive (pd.Series): Serie with the positive class to plot
         negative (pd.Series): Serie with the negative class to plot
         numeric_var (str): Name of the numerical variable to plot
         target_name (str): Name of the target variable to classify
-    '''
+    """
     plt.hist(positive, bins=25, alpha=0.6, label=target_name)
     plt.hist(negative, bins=25, alpha=0.6, label=f'not {target_name}')
     plt.xlabel(numeric_var, fontsize=12)
@@ -82,14 +85,15 @@ def plot_numerical(positive, negative, numeric_var, target_name):
 
 
 def single_cross_val(classifier, model_name, color, X, Y):
-    ''' Appends a ROC from the classifier
+    """ Appends a ROC from the classifier
 
     Args:
-        classifier (str): Model to run the classification task
-        to append to the plot
+        classifier: Model to run the classification task to append to the plot
+        model_name (str): Name of the model for the plot
+        color (str): Color to plot
         X (pd.DataFrame): Main dataset with the variables
         Y (pd.Series): Target variable
-    '''
+    """
     cross_val = StratifiedKFold(n_splits=6)
     tprs = []
     aucs = []
@@ -101,7 +105,7 @@ def single_cross_val(classifier, model_name, color, X, Y):
         probas = classifier.fit(X[train], Y[train]).predict_proba(X[test])
         # Computa ROC
         fpr, tpr, _ = roc_curve(Y[test], probas[:, 1])
-        tprs.append(interp(mean_fpr, fpr, tpr))
+        tprs.append(np.interp(mean_fpr, fpr, tpr))
         tprs[-1][0] = 0.0
         roc_auc = auc(fpr, tpr)
         aucs.append(roc_auc)
@@ -115,13 +119,13 @@ def single_cross_val(classifier, model_name, color, X, Y):
 
 
 def plot_roc_cross_val(X, Y, models):
-    ''' Plots all the models with their ROC
+    """ Plots all the models with their ROC
 
     Args:
         X (pd.DataFrame): Main dataset with the variables
         Y (pd.Series): Target variable
         models (list(tuple)): Models to evaluate
-    '''
+    """
     color_map = plt.cm.get_cmap('hsv', len(models))
     for i, (model_name, model) in enumerate(models):
         single_cross_val(model, model_name, color_map(i), X, Y)
