@@ -1,7 +1,15 @@
-.. silk_ml documentation master file, created by
-   sphinx-quickstart on Fri Aug  2 14:36:47 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+*******
+silk-ml
+*******
+
+.. image:: https://img.shields.io/pypi/v/silk-ml.svg
+   :target: https://pypi.python.org/pypi/silk-ml
+   :alt: PyPI Version
+.. image:: https://img.shields.io/pypi/pyversions/silk-ml.svg
+   :target: https://pypi.python.org/pypi/silk-ml
+   :alt: PyPI python Version
+
+Simple Intelligent Learning Kit (SILK) for Machine learning
 
 Welcome to silk_ml's documentation!
 ===================================
@@ -19,8 +27,13 @@ List of project's modules
 
 .. toctree::
    :maxdepth: 2
-   
+
    _autosummary/classification.rst
+   _autosummary/features.rst
+   _autosummary/imbalanced.rst
+   _autosummary/plots.rst
+   _autosummary/train.rst
+   _autosummary/scores.rst
 
 
 

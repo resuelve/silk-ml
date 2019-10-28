@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>classification &#8212; silk_ml 0.0.3 documentation</title>
+    <title>classification &#8212; silk_ml 0.1.1 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -14,7 +14,8 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Welcome to silk_ml’s documentation!" href="../index.html" />
+    <link rel="next" title="features" href="features.html" />
+    <link rel="prev" title="silk-ml" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,29 +36,18 @@
 <span id="classification"></span><h1>classification<a class="headerlink" href="#module-silk_ml.classification" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="silk_ml.classification.Classifier">
-<em class="property">class </em><code class="sig-prename descclassname">silk_ml.classification.</code><code class="sig-name descname">Classifier</code><span class="sig-paren">(</span><em class="sig-param">target=None</em>, <em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">silk_ml.classification.</code><code class="sig-name descname">Classifier</code><span class="sig-paren">(</span><em class="sig-param">target=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">target_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>General tasks for classification and data analysis</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target</strong> (<em>string</em>) – categorical variable to classify</p></li>
-<li><p><strong>filename</strong> (<em>string</em>) – name with path for reading a csv file</p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Categorical variable to classify</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Name with path for reading a csv file</p></li>
+<li><p><strong>target_name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Target name for reports</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="silk_ml.classification.Classifier.set_target">
-<code class="sig-name descname">set_target</code><span class="sig-paren">(</span><em class="sig-param">target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.set_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.set_target" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the target variable and if the data value exists,
-the X and Y values are setted as well</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>target</strong> (<em>string</em>) – categorical variable to classify</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="method">
 <dt id="silk_ml.classification.Classifier.read_csv">
 <code class="sig-name descname">read_csv</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.read_csv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.read_csv" title="Permalink to this definition">¶</a></dt>
@@ -65,57 +55,123 @@ the X and Y values are setted as well</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target</strong> (<em>string</em>) – categorical variable to classify</p></li>
-<li><p><strong>filename</strong> (<em>string</em>) – name with path for reading a csv file</p></li>
+<li><p><strong>target</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Categorical variable to classify</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name with path for reading a csv file</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><cite>X</cite>, <cite>Y</cite>, and <cite>data</cite> values</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)">list</a>(DataFrame)</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)">list</a>(pd.DataFrame)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.standarize">
-<code class="sig-name descname">standarize</code><span class="sig-paren">(</span><em class="sig-param">normalizer</em>, <em class="sig-param">scaler</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.standarize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.standarize" title="Permalink to this definition">¶</a></dt>
+<dt id="silk_ml.classification.Classifier.standardize">
+<code class="sig-name descname">standardize</code><span class="sig-paren">(</span><em class="sig-param">normalizer</em>, <em class="sig-param">scaler</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.standardize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.standardize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a normalizer and scaler preprocessing steps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>normalizer</strong> (implements <cite>fit_transform</cite> method) – class that centers the data</p></li>
-<li><p><strong>scaler</strong> (implements <cite>fit_transform</cite> method) – class that modifies the data boundaries</p></li>
+<li><p><strong>normalizer</strong> (<em>Class.fit_transform</em>) – Class that centers the data</p></li>
+<li><p><strong>scaler</strong> (<em>Class.fit_transform</em>) – Class that modifies the data boundaries</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.split_classes">
-<code class="sig-name descname">split_classes</code><span class="sig-paren">(</span><em class="sig-param">label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.split_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.split_classes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the splited value of the dataset using the requested label</p>
+<dt id="silk_ml.classification.Classifier.features_metrics">
+<code class="sig-name descname">features_metrics</code><span class="sig-paren">(</span><em class="sig-param">plot=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.features_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.features_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for each variable the probability of being splited</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the <cite>positive</cite> and <cite>negative</cite> data splited</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>plot</strong> (<em>'all'</em><em> or </em><em>'categorical'</em><em> or </em><em>'numerical'</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Plots the
+variables, showing the difference in the classes</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)">list</a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)">list</a>)</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Table of variables and their classification tests</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
-<dt id="silk_ml.classification.Classifier.features_metrics">
-<code class="sig-name descname">features_metrics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.features_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.features_metrics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks for each variable the probability of being splited</p>
+<dt id="silk_ml.classification.Classifier.remove_features">
+<code class="sig-name descname">remove_features</code><span class="sig-paren">(</span><em class="sig-param">features</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.remove_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.remove_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove features from the X values</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>table of variables and their classification tests</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em>)</em>) – Column’s names to remove</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>DataFrame</p>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="silk_ml.classification.Classifier.resample">
+<code class="sig-name descname">resample</code><span class="sig-paren">(</span><em class="sig-param">rate=0.9</em>, <em class="sig-param">strategy='hybrid'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.resample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sampling based methods to balance dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rate</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Ratio of the number of samples in the minority class
+over the number of samples in the majority class after
+resampling</p></li>
+<li><p><strong>strategy</strong> (<em>'hybrid'</em><em> or </em><em>'over_sampling'</em><em> or </em><em>'under_sampling'</em>) – Strategy
+to balance the dataset</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="silk_ml.classification.Classifier.cross_validation">
+<code class="sig-name descname">cross_validation</code><span class="sig-paren">(</span><em class="sig-param">models</em>, <em class="sig-param">scores</em>, <em class="sig-param">folds=30</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.cross_validation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.cross_validation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates several models and scores</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em>)</em>) – Models to evaluate</p></li>
+<li><p><strong>scores</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em>)</em>) – Scores to measure the models</p></li>
+<li><p><strong>folds</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Number of folds in a (Stratified)KFold</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="silk_ml.classification.Classifier.plot_corr">
+<code class="sig-name descname">plot_corr</code><span class="sig-paren">(</span><em class="sig-param">values=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.plot_corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.plot_corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the correlation matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Shows each of the correlation values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="silk_ml.classification.Classifier.plot_mainfold">
+<code class="sig-name descname">plot_mainfold</code><span class="sig-paren">(</span><em class="sig-param">method</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.plot_mainfold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.plot_mainfold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the reduced space using a mainfold transformation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> (<em>Class.fit_transform</em>) – Mainfold transformation method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="silk_ml.classification.Classifier.plot_roc_cross_val">
+<code class="sig-name descname">plot_roc_cross_val</code><span class="sig-paren">(</span><em class="sig-param">models</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/classification.html#Classifier.plot_roc_cross_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.classification.Classifier.plot_roc_cross_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots all the models with their ROC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em>)</em>) – Models to evaluate</p>
 </dd>
 </dl>
 </dd></dl>
@@ -150,6 +206,11 @@ the X and Y values are setted as well</p>
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imbalanced.html">imbalanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scores.html">scores</a></li>
 </ul>
 
 
@@ -179,10 +240,6 @@ the X and Y values are setted as well</p>
           rel="nofollow">Page source</a>
     </div>
 
-    
-    <a href="https://github.com/resuelve/silk-ml" class="github">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
-    </a>
     
 
     
