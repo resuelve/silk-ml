@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>features &#8212; silk_ml 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="imbalanced" href="imbalanced.html" />
+    <link rel="prev" title="classification" href="classification.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-silk_ml.features">
+<span id="features"></span><h1>features<a class="headerlink" href="#module-silk_ml.features" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="silk_ml.features.split_classes">
+<code class="sig-prename descclassname">silk_ml.features.</code><code class="sig-name descname">split_classes</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/features.html#split_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.features.split_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the splited value of the dataset using the requested label</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Main dataset with the variables</p></li>
+<li><p><strong>Y</strong> (<em>pd.Series</em>) – Target variable</p></li>
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the variable to split</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <cite>positive</cite> and <cite>negative</cite> data splited</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a>(pd.Series, pd.Series)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="silk_ml.features.features_metrics">
+<code class="sig-prename descclassname">silk_ml.features.</code><code class="sig-name descname">features_metrics</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">target_name</em>, <em class="sig-param">plot=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/features.html#features_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.features.features_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the likelihood from each variable of splitting correctly the dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Main dataset with the variables</p></li>
+<li><p><strong>Y</strong> (<em>pd.Series</em>) – Target variable</p></li>
+<li><p><strong>target_name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Target name for reports</p></li>
+<li><p><strong>plot</strong> (<em>'all'</em><em> or </em><em>'categorical'</em><em> or </em><em>'numerical'</em><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Plots the
+variables, showing the difference in the classes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Table of variables and their classification tests</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">silk_ml</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=resuelve&repo=silk-ml&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="classification.html">classification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imbalanced.html">imbalanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scores.html">scores</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Resuelve.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary/features.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

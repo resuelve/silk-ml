@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>plots &#8212; silk_ml 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="train" href="train.html" />
+    <link rel="prev" title="imbalanced" href="imbalanced.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-silk_ml.plots">
+<span id="plots"></span><h1>plots<a class="headerlink" href="#module-silk_ml.plots" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="silk_ml.plots.plot_corr">
+<code class="sig-prename descclassname">silk_ml.plots.</code><code class="sig-name descname">plot_corr</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">values=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/plots.html#plot_corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.plots.plot_corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots correlation matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – Data to compute correlation matrix</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3.7/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Plot values in the matrix</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="silk_ml.plots.plot_mainfold">
+<code class="sig-prename descclassname">silk_ml.plots.</code><code class="sig-name descname">plot_mainfold</code><span class="sig-paren">(</span><em class="sig-param">method</em>, <em class="sig-param">data</em>, <em class="sig-param">target_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/plots.html#plot_mainfold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.plots.plot_mainfold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the information using dimensionality reduction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>Class.fit_transform</em>) – Mainfold transformation method</p></li>
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – Dataset to reduce, with two classes</p></li>
+<li><p><strong>target_name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the variable to classify</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="silk_ml.plots.plot_categorical">
+<code class="sig-prename descclassname">silk_ml.plots.</code><code class="sig-name descname">plot_categorical</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">catego_var</em>, <em class="sig-param">target_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/plots.html#plot_categorical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.plots.plot_categorical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the categorical variable, showing the two classes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Main dataset with the categorical variables</p></li>
+<li><p><strong>Y</strong> (<em>pd.Series</em>) – Target variable</p></li>
+<li><p><strong>catego_var</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the categorical variable to plot</p></li>
+<li><p><strong>target_name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the target variable to classify</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="silk_ml.plots.plot_numerical">
+<code class="sig-prename descclassname">silk_ml.plots.</code><code class="sig-name descname">plot_numerical</code><span class="sig-paren">(</span><em class="sig-param">positive</em>, <em class="sig-param">negative</em>, <em class="sig-param">numeric_var</em>, <em class="sig-param">target_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/plots.html#plot_numerical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.plots.plot_numerical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the information using dimentionality reduction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positive</strong> (<em>pd.Series</em>) – Serie with the positive class to plot</p></li>
+<li><p><strong>negative</strong> (<em>pd.Series</em>) – Serie with the negative class to plot</p></li>
+<li><p><strong>numeric_var</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the numerical variable to plot</p></li>
+<li><p><strong>target_name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the target variable to classify</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="silk_ml.plots.single_cross_val">
+<code class="sig-prename descclassname">silk_ml.plots.</code><code class="sig-name descname">single_cross_val</code><span class="sig-paren">(</span><em class="sig-param">classifier</em>, <em class="sig-param">model_name</em>, <em class="sig-param">color</em>, <em class="sig-param">X</em>, <em class="sig-param">Y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/plots.html#single_cross_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.plots.single_cross_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends a ROC from the classifier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classifier</strong> – Model to run the classification task to append to the plot</p></li>
+<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Name of the model for the plot</p></li>
+<li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Color to plot</p></li>
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Main dataset with the variables</p></li>
+<li><p><strong>Y</strong> (<em>pd.Series</em>) – Target variable</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="silk_ml.plots.plot_roc_cross_val">
+<code class="sig-prename descclassname">silk_ml.plots.</code><code class="sig-name descname">plot_roc_cross_val</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">models</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/silk_ml/plots.html#plot_roc_cross_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#silk_ml.plots.plot_roc_cross_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots all the models with their ROC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Main dataset with the variables</p></li>
+<li><p><strong>Y</strong> (<em>pd.Series</em>) – Target variable</p></li>
+<li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3.7/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a><em>)</em>) – Models to evaluate</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">silk_ml</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=resuelve&repo=silk-ml&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="classification.html">classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imbalanced.html">imbalanced</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="train.html">train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scores.html">scores</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Resuelve.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary/plots.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
