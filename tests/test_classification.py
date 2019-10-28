@@ -1,6 +1,5 @@
 import unittest
 
-from sklearn import preprocessing
 from silk_ml.classification import Classifier
 from .helper import generate_test
 
@@ -13,8 +12,8 @@ class TestClassification(unittest.TestCase):
         self.assertEqual(Classifier(target='test').target, 'test')
 
     def test_metrics(self):
-        Classifier = generate_test()
-        metrics = Classifier.features_metrics()
+        classifier = generate_test()
+        metrics = classifier.features_metrics()
 
         # Check kind of values, p-values are variables
         self.assertEqual(

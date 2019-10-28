@@ -3,7 +3,6 @@ import pandas as pd
 import random as rd
 
 from silk_ml.features import split_classes
-from .helper import generate_test
 
 
 class TestFeatures(unittest.TestCase):
