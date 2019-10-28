@@ -2,7 +2,7 @@ from sklearn.metrics import confusion_matrix
 
 
 def ls_score(y, y_predicted):
-    """
+    """ Score that punishes the false negative values, that goes from -1 to 1
     Args:
         y (list): 1d array-like, or label indicator array / sparse matrix
             ground truth (correct) labels.
