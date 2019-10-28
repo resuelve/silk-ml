@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>silk_ml.features &#8212; silk_ml 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for silk_ml.features</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">chi2_contingency</span><span class="p">,</span> <span class="n">ttest_ind</span>
+
+<span class="kn">from</span> <span class="nn">.plots</span> <span class="k">import</span> <span class="n">plot_categorical</span><span class="p">,</span> <span class="n">plot_numerical</span>
+
+
+<div class="viewcode-block" id="split_classes"><a class="viewcode-back" href="../../_autosummary/features.html#silk_ml.features.split_classes">[docs]</a><span class="k">def</span> <span class="nf">split_classes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the splited value of the dataset using the requested label</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Main dataset with the variables</span>
+<span class="sd">        Y (pd.Series): Target variable</span>
+<span class="sd">        label (str): Name of the variable to split</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple(pd.Series, pd.Series): The `positive` and `negative` data splited</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">positive</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="n">label</span><span class="p">]</span>
+    <span class="n">negative</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">Y</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">][</span><span class="n">label</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">positive</span><span class="p">,</span> <span class="n">negative</span></div>
+
+
+<div class="viewcode-block" id="features_metrics"><a class="viewcode-back" href="../../_autosummary/features.html#silk_ml.features.features_metrics">[docs]</a><span class="k">def</span> <span class="nf">features_metrics</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">target_name</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Determines the likelihood from each variable of splitting correctly the dataset</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Main dataset with the variables</span>
+<span class="sd">        Y (pd.Series): Target variable</span>
+<span class="sd">        target_name (str or None): Target name for reports</span>
+<span class="sd">        plot (&#39;all&#39; or &#39;categorical&#39; or &#39;numerical&#39; or None): Plots the</span>
+<span class="sd">            variables, showing the difference in the classes</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Table of variables and their classification tests</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plot_cat</span> <span class="o">=</span> <span class="n">plot</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">]</span>
+    <span class="n">plot_num</span> <span class="o">=</span> <span class="n">plot</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;numerical&#39;</span><span class="p">]</span>
+
+    <span class="n">features</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">is_categorical</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+        <span class="c1"># Currify the categorical validation</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">test_variable</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+        <span class="c1"># Currify the call for the p-value calculator</span>
+        <span class="k">if</span> <span class="n">is_categorical</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+            <span class="n">test</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="n">_test_categorical</span><span class="p">,</span> <span class="n">plot_cat</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">test</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="n">_test_numerical</span><span class="p">,</span> <span class="n">plot_num</span>
+        <span class="k">return</span> <span class="n">test</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">target_name</span><span class="p">,</span> <span class="n">plot</span><span class="p">)</span>
+
+    <span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cardinality kind&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;categorical&#39;</span> <span class="k">if</span> <span class="n">is_categorical</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;numerical&#39;</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;split probability&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">f</span><span class="s1">&#39;{(100 - test_variable(column) * 100):.4f} %&#39;</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span>
+        <span class="p">],</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_test_categorical</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">target_name</span><span class="p">,</span> <span class="n">plot_cat</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Runs the p-value test for the current variable</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Main dataset with the variables</span>
+<span class="sd">        Y (pd.Series): Target variable</span>
+<span class="sd">        column (str): Name of the variable to test</span>
+<span class="sd">        target_name (str or None): Target name for reports</span>
+<span class="sd">        plot_cat (bool): Plots the current variable</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: p-value of the variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">plot_cat</span><span class="p">:</span>
+        <span class="n">plot_categorical</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">target_name</span><span class="p">)</span>
+    <span class="n">cont_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">cont_table</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_test_numerical</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">target_name</span><span class="p">,</span> <span class="n">plot_num</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Runs the p-value test for the current variable</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): Main dataset with the variables</span>
+<span class="sd">        Y (pd.Series): Target variable</span>
+<span class="sd">        column (str): Name of the variable to test</span>
+<span class="sd">        target_name (str or None): Target name for reports</span>
+<span class="sd">        plot_num (bool): Plots the current variable</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: p-value of the variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">positive</span><span class="p">,</span> <span class="n">negative</span> <span class="o">=</span> <span class="n">split_classes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_num</span><span class="p">:</span>
+        <span class="n">plot_numerical</span><span class="p">(</span><span class="n">positive</span><span class="p">,</span> <span class="n">negative</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">target_name</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">positive</span><span class="p">,</span> <span class="n">negative</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p_value</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">silk_ml</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=resuelve&repo=silk-ml&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/classification.html">classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/features.html">features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/imbalanced.html">imbalanced</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/plots.html">plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/train.html">train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/scores.html">scores</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Resuelve.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
