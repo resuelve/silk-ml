@@ -1,6 +1,6 @@
 import pandas as pd
 
-from silk_ml.general.features import features_metrics
+from silk_ml.features.features import features_metrics
 from silk_ml.general.plots import plot_corr, plot_mainfold, plot_roc_cross_val
 from silk_ml.general.train import cross_validation
 from silk_ml.general.imbalanced import resample
