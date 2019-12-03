@@ -1,7 +1,7 @@
 import random as rd
 import pandas as pd
 
-from silk_ml.classification import Classifier
+from silk_ml.modeling.classification import Classifier
 
 
 def generate_test():

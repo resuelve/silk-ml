@@ -1,6 +1,6 @@
 import unittest
 
-from silk_ml.classification import Classifier
+from silk_ml.modeling.classification import Classifier
 from .helper import generate_test
 
 

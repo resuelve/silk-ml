@@ -1,6 +1,6 @@
 import unittest
 
-from silk_ml.scores import ls_score
+from silk_ml.general.scores import ls_score
 
 
 class TestScores(unittest.TestCase):
