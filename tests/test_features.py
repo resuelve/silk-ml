@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 import random as rd
 
-from silk_ml.features import split_classes
+from silk_ml.features.features import split_classes
 
 
 class TestFeatures(unittest.TestCase):

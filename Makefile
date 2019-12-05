@@ -1,6 +1,9 @@
 test:
 	python3 -m unittest tests/test_*
 
+install:
+	python3 -m pip install -r requirements.txt
+
 # Publish commands
 publish: test publish.docs publish.package publish.pypi
 

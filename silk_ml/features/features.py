@@ -1,7 +1,7 @@
 import pandas as pd
 from scipy.stats import chi2_contingency, ttest_ind
 
-from .plots import plot_categorical, plot_numerical
+from silk_ml.general.plots import plot_categorical, plot_numerical
 
 
 def split_classes(X, Y, label):
